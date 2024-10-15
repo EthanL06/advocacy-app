@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "convergent-app",
-    "slug": "convergent-app",
+    "name": "advocacy-app",
+    "slug": "advocacy-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
