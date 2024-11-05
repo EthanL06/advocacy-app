@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, View, StyleSheet, TouchableHighlight, ScrollView } from "react-native";
 import MapView, { Callout, Details, Marker, Region } from "react-native-maps";
 import { getUserLocation } from '../services/LocationService'
 import { Airplay, Camera } from "@tamagui/lucide-icons";
@@ -65,14 +65,7 @@ export default function Index() {
               borderRadius: 10,
             }}
           >
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: "bold",
-              }}
-            >
-              Custom Callout
-            </Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold", }}>Custom Callout</Text>
           </Callout>
         </Marker>
       </MapView>
