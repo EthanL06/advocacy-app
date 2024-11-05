@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
 import MapView, { Callout, Details, Marker, Region } from "react-native-maps";
 import { getUserLocation } from '../services/LocationService'
 import { Airplay, Camera } from "@tamagui/lucide-icons";
-import { Button } from "tamagui";
 
 export default function Index() {
   const [draggableMarkerCoord, setDraggableMarkerCoord] = useState({
@@ -66,19 +65,16 @@ export default function Index() {
               borderRadius: 10,
             }}
           >
-            <Text style={{ fontSize: 16, fontWeight: "bold", }}>Custom Callout</Text>
-            <Button title="Press me" onPress={() => console.log("Button pressed")}/>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              Custom Callout
+            </Text>
           </Callout>
         </Marker>
-
-        <View style={styles.mapOverlay}>
-          <Button backgroundColor="$blue4" icon={Camera}>
-            test
-          </Button>
-          <Button alignSelf="center" icon={Airplay} size="$6">
-            Large
-          </Button>
-        </View>
       </MapView>
     </View>
   );
