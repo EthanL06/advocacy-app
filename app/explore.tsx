@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import React from "react";
-import DiscussionCard from "../components/discussion/post";
+import DiscussionCard from "../components/explore/post";
 
 type Props = {};
 

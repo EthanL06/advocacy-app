@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, GestureResponderEvent } from 'react-native';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import Entypo from '@expo/vector-icons/Entypo';
 
 // Define interface for component props
 interface DiscussionCardProps {
@@ -8,26 +10,6 @@ interface DiscussionCardProps {
   description?: string;
   onPress?: (event: GestureResponderEvent) => void;
 }
-
-// Custom icon components using Views
-const UserIcon = () => (
-  <View style={styles.iconContainer}>
-    <View style={styles.userIconHead} />
-    <View style={styles.userIconBody} />
-  </View>
-);
-
-const CommentIcon = () => (
-  <View style={styles.iconContainer}>
-    <View style={styles.commentIconBubble} />
-  </View>
-);
-
-const ShareIcon = () => (
-  <View style={styles.iconContainer}>
-    <View style={styles.shareIconArrow} />
-  </View>
-);
 
 const DiscussionCard: React.FC<DiscussionCardProps> = ({ 
   username = "@username",
@@ -42,7 +24,7 @@ const DiscussionCard: React.FC<DiscussionCardProps> = ({
     >
       <View style={styles.userContainer}>
         <View style={styles.avatarContainer}>
-          <UserIcon />
+          <FontAwesome5 name="user" size={16} color="#666666" />
         </View>
         <Text style={styles.username}>{username}</Text>
       </View>
@@ -52,17 +34,17 @@ const DiscussionCard: React.FC<DiscussionCardProps> = ({
 
       <View style={styles.interactionContainer}>
         <View style={styles.interactionItem}>
-          <CommentIcon />
+          <FontAwesome5 name="pen-fancy" size={16} color="black" />
           <Text style={styles.interactionText}>00</Text>
         </View>
         
         <View style={styles.interactionItem}>
-          <UserIcon />
+          <FontAwesome5 name="comment" size={16} color="#666666" />
           <Text style={styles.interactionText}>00</Text>
         </View>
         
         <View style={styles.interactionItem}>
-          <ShareIcon />
+          <Entypo name="share-alternative" size={16} color="black" />
           <Text style={styles.interactionText}>00</Text>
         </View>
       </View>
@@ -73,6 +55,8 @@ const DiscussionCard: React.FC<DiscussionCardProps> = ({
     </TouchableOpacity>
   );
 };
+
+export default DiscussionCard;
 
 const styles = StyleSheet.create({
   card: {
@@ -130,38 +114,4 @@ const styles = StyleSheet.create({
   placeholderText: {
     color: '#999999',
   },
-  iconContainer: {
-    width: 20,
-    height: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  userIconHead: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#666666',
-  },
-  userIconBody: {
-    width: 12,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#666666',
-    marginTop: 2,
-  },
-  commentIconBubble: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: '#666666',
-  },
-  shareIconArrow: {
-    width: 12,
-    height: 2,
-    backgroundColor: '#666666',
-    transform: [{ rotate: '45deg' }],
-  },
 });
-
-export default DiscussionCard;
