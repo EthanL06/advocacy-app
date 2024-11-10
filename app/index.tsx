@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
-import { Text, View, StyleSheet, TouchableHighlight, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  TouchableOpacity,
+  TouchableHighlight,
+  Pressable,
+} from "react-native";
 import MapView, { Callout, Details, Marker, Region } from "react-native-maps";
-import { getUserLocation } from '../services/LocationService'
-import { Airplay, Camera } from "@tamagui/lucide-icons";
+import { getUserLocation } from "../services/LocationService";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { addReport } from "@/firebase/firestore";
 
 export default function Index() {
   const [draggableMarkerCoord, setDraggableMarkerCoord] = useState({
@@ -11,7 +20,7 @@ export default function Index() {
   });
 
   const [currentLocation, setCurrentLocation] = useState({
-    latitude: 38.8977,  // Default location
+    latitude: 38.8977, // Default location
     longitude: -77.0365,
   });
 
@@ -34,11 +43,11 @@ export default function Index() {
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", }}>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: currentLocation.latitude,  // Use current location
+          latitude: currentLocation.latitude, // Use current location
           longitude: currentLocation.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
@@ -47,6 +56,27 @@ export default function Index() {
         showsUserLocation={true}
         followsUserLocation={true}
       >
+        <Pressable
+          onPress={() => {
+            addReport({
+              title: "New report",
+              description: "This is a new report",
+              author: "Anonymous",
+              createdDate: new Date(),
+            }).then((id) => {
+              console.log("Report added with ID: ", id);
+            });
+          }}
+          style={({ pressed }) => [
+            styles.reportButton,
+            {
+              backgroundColor: pressed ? "gray" : "white",
+            },
+          ]}
+        >
+          <AntDesign name="plus" size={24} color="black" />
+        </Pressable>
+
         <Marker
           draggable
           coordinate={draggableMarkerCoord}
@@ -79,16 +109,14 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 12,
   },
-  mapOverlay: {
+  reportButton: {
     position: "absolute",
-    bottom: 40,
-    borderWidth: 2,
-    borderRadius: 20,
-    overflow: "hidden",
-    padding: 10,
-    width: "100%",
-    left: 12,
-    textAlign: "center",
-    zIndex: 100,
+    top: 60,
+    right: 20,
+    padding: 12,
+    borderRadius: 15,
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 10,
+    shadowOpacity: 0.1,
   },
 });
