@@ -95,14 +95,7 @@ export default function Index() {
               borderRadius: 10,
             }}
           >
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: "bold",
-              }}
-            >
-              Custom Callout
-            </Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold", }}>Custom Callout</Text>
           </Callout>
         </Marker>
       </MapView>
