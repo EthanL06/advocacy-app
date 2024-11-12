@@ -1,7 +1,9 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DiscussionCard from "../components/explore/post";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { ReportType } from "@/types";
+import { getReports } from "@/firebase/firestore";
 
 type Props = {};
 
@@ -58,6 +60,17 @@ const Explore = (props: Props) => {
       description: "The sidewalk here is cracked and unsafe.",
     },
   ];
+  const [reports, setReports] = useState<ReportType[]>([]);
+
+  useEffect(() => {
+    const fetchReports = async () => {
+      // Fetch reports from API
+      const reports = await getReports();
+      setReports(reports || []);
+    };
+
+    fetchReports();
+  }, []);
 
   return (
     <SafeAreaView
@@ -69,12 +82,13 @@ const Explore = (props: Props) => {
       <View style={styles.container}>
         <Text style={styles.header}>Explore</Text>
         <ScrollView contentContainerStyle={styles.cardContainer}>
-          {testData.map((item, index) => (
+          {reports.map((item, index) => (
             <DiscussionCard
               key={index}
-              username={item.username}
+              username={item.author}
               title={item.title}
               description={item.description}
+              image={item.images ? item.images[0] : ""}
               onPress={() => console.log(`Card ${index + 1} pressed!`)}
             />
           ))}
