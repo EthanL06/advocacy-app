@@ -1,9 +1,9 @@
-// app/notifications.tsx
-
 import React, { useState } from "react";
 import { View, Text, FlatList, StyleSheet } from "react-native";
 import NotificationTabs from "../components/notifications/NotificationTab";
 import NotificationCard from "../components/notifications/NotificationCard";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 // Sample data for notifications
 const notificationData = [
@@ -27,23 +27,30 @@ const Notifications = () => {
   console.log("Filtered Notifications:", filteredNotifications);  // Debugging log
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Notifications</Text>
-      <NotificationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-      <FlatList
-        data={filteredNotifications}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <NotificationCard
-            name={item.name}
-            description={item.description}
-            time={item.time}
-            type={item.type}  // Pass the type to NotificationCard
-          />
-        )}
-        ListEmptyComponent={<Text>No notifications available.</Text>}  // Message when list is empty
-      />
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      <View style={styles.container}>
+        <Text style={styles.header}>Notifications</Text>
+        <NotificationTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+        <FlatList
+          data={filteredNotifications}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <NotificationCard
+              name={item.name}
+              description={item.description}
+              time={item.time}
+              type={item.type}  // Pass the type to NotificationCard
+            />
+          )}
+          ListEmptyComponent={<Text>No notifications available.</Text>}  // Message when list is empty
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
